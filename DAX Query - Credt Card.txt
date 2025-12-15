@@ -1,10 +1,10 @@
--- =============================================
--- Credit Card & Customer DAX Definitions
--- =============================================
+=============================================
+Credit Card & Customer DAX Definitions
+=============================================
 
--- ======================
--- TABLE: credit_card
--- ======================
+======================
+TABLE: credit_card
+======================
 
 -- Measure: Activation Rate Percentage
 Activation Rate % = 
@@ -82,9 +82,9 @@ DIVIDE(
 )
 
 
--- ======================
--- TABLE: customer
--- ======================
+======================
+TABLE: customer
+======================
 
 -- Calculated Column: Age Group
 AgeGroup = 
@@ -107,3 +107,4 @@ SWITCH(
     customer[Income] >= 70000,                      "High",
     "Unknown"
 )
+
