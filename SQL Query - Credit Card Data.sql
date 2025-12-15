@@ -1,15 +1,15 @@
 -- SQL Query to create and import data from csv files (SSMS)
 
 -- 1. Create a database 
-CREATE DATABASE ccdb;
+CREATE DATABASE CreditCard;
 GO
 
-USE ccdb;
+USE CreditCard;
 GO
 
 -- 2. Create cc_detail table
 
-CREATE TABLE cc_detail (
+CREATE TABLE credit_card (
     Client_Num INT,
     Card_Category VARCHAR(20),
     Annual_Fees INT,
@@ -34,7 +34,7 @@ GO
 
 -- 3. Create cust_detail table
 
-CREATE TABLE cust_detail (
+CREATE TABLE customer (
     Client_Num INT,
     Customer_Age INT,
     Gender VARCHAR(5),
@@ -62,7 +62,7 @@ GO
 
 -- copy cc_detail table
 
-BULK INSERT cc_detail
+BULK INSERT credit_card
 FROM 'D:\credit_card.csv'
 WITH (
     FIRSTROW = 2,
@@ -75,7 +75,7 @@ GO
 
 -- copy cust_detail table
 
-BULK INSERT cust_detail
+BULK INSERT customer
 FROM 'D:\customer.csv'
 WITH (
     FIRSTROW = 2,
@@ -92,7 +92,7 @@ GO
 
 -- copy additional data (week-53) in cc_detail table
 
-BULK INSERT cc_detail
+BULK INSERT credit_card
 FROM 'D:\cc_add.csv'
 WITH (
     FIRSTROW = 2,
@@ -106,7 +106,7 @@ GO
 -- copy additional data (week-53) in cust_detail table 
 -- (remember to update the file name and file location in below query)
 
-BULK INSERT cust_detail
+BULK INSERT customer
 FROM 'D:\cust_add.csv'
 WITH (
     FIRSTROW = 2,
@@ -115,3 +115,4 @@ WITH (
     TABLOCK
 );
 GO
+
