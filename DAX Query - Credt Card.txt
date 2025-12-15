@@ -1,0 +1,109 @@
+-- =============================================
+-- Credit Card & Customer DAX Definitions
+-- =============================================
+
+-- ======================
+-- TABLE: credit_card
+-- ======================
+
+-- Measure: Activation Rate Percentage
+Activation Rate % = 
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(credit_card),
+        credit_card[Activation_30_Days] = 1
+    ),
+    COUNTROWS(credit_card)
+)
+
+-- Measure: Current Week Revenue
+Current_Week_Revenue = 
+CALCULATE(
+    SUM(credit_card[Revenue]),
+    FILTER(
+        ALL(credit_card),
+        credit_card[Week_Num2] = MAX(credit_card[Week_Num2])
+    )
+)
+
+-- Measure: Delinquency Rate Percentage
+Delinquency Rate % = 
+DIVIDE(
+    SUM(credit_card[Delinquent_Acc]),
+    DISTINCTCOUNT(credit_card[Client_Num])
+)
+
+-- Measure: Previous Week Revenue
+Previous_Week_Revenue = 
+CALCULATE(
+    SUM(credit_card[Revenue]),
+    FILTER(
+        ALL(credit_card),
+        credit_card[Week_Num2] = MAX(credit_card[Week_Num2]) - 1
+    )
+)
+
+-- Calculated Column: Revenue
+Revenue = 
+credit_card[Annual_Fees]
+    + credit_card[Total_Trans_Amt]
+    + credit_card[Interest_Earned]
+
+-- Calculated Column: Utilization Band
+Utilization Band = 
+SWITCH(
+    TRUE(),
+    credit_card[Avg_Utilization_Ratio] <= 0.30, "0–30%",
+    credit_card[Avg_Utilization_Ratio] <= 0.60, "30–60%",
+    credit_card[Avg_Utilization_Ratio] <= 0.90, "60–90%",
+    credit_card[Avg_Utilization_Ratio] > 0.90,  "90%+",
+    "Unknown"
+)
+
+-- Calculated Column: Utilization Band Sort
+Utilization Band Sort = 
+SWITCH(
+    credit_card[Utilization Band],
+    "0–30%", 1,
+    "30–60%", 2,
+    "60–90%", 3,
+    "90%+",   4
+)
+
+-- Calculated Column: Week Number
+Week_Num2 = 
+WEEKNUM(credit_card[Week_Start_Date])
+
+-- Measure: Week-over-Week Revenue Growth
+WeekOverWeek_Revenue = 
+DIVIDE(
+    [Current_Week_Revenue] - [Previous_Week_Revenue],
+    [Previous_Week_Revenue]
+)
+
+
+-- ======================
+-- TABLE: customer
+-- ======================
+
+-- Calculated Column: Age Group
+AgeGroup = 
+SWITCH(
+    TRUE(), 
+    customer[Customer_Age] < 30,                          "20-30",
+    customer[Customer_Age] >= 30 && customer[Customer_Age] < 40, "30-40", 
+    customer[Customer_Age] >= 40 && customer[Customer_Age] < 50, "40-50",
+    customer[Customer_Age] >= 50 && customer[Customer_Age] < 60, "50-60",
+    customer[Customer_Age] >= 60,                         "60+",
+    "Unknown"
+)
+
+-- Calculated Column: Income Group
+IncomeGroup = 
+SWITCH(
+    TRUE(),
+    customer[Income] < 35000,                       "Low",
+    customer[Income] >= 35000 && customer[Income] < 70000, "Med",
+    customer[Income] >= 70000,                      "High",
+    "Unknown"
+)
