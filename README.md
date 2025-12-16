@@ -1,20 +1,18 @@
 # Credit_Card_Financial_Dashboard
 
-## Power BI Dashboard
+## 📊 Power BI Dashboard
 
-### Project Objective
+### 🎯Project Objective
 Develop a comprehensive weekly credit card dashboard that delivers real-time insights into key performance metrics and trends, enabling stakeholders to effectively monitor and analyze credit card operations.
-
 ---
 
-## Data Pipeline: Import Data to SQL Database
+## 🗄️ Data Pipeline: Import Data to SQL Database
 1. Prepare CSV files  
 2. Create tables in SQL  
 3. Import CSV files into SQL  
-
 ---
 
-## Project Insights
+## 📌 Project Insights
 
 ### Top 5 Insights – Week 52
 1. Revenue declined **12.8% WoW** to **$0.93M**, reversing growth observed in Weeks 50–51, likely due to short-term or seasonal softness.  
