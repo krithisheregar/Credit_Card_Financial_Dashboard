@@ -1,8 +1,6 @@
-# Credit_Card_Financial_Dashboard
+# 📊 Credit_Card_Financial_Dashboard
 
-## 📊 Power BI Dashboard
-
-### 🎯Project Objective
+## 🎯Project Objective
 Develop a comprehensive weekly credit card dashboard that delivers real-time insights into key performance metrics and trends, enabling stakeholders to effectively monitor and analyze credit card operations.
 ---
 
