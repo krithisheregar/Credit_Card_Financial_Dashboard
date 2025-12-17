@@ -7,7 +7,8 @@ Develop a comprehensive weekly credit card dashboard that delivers real-time ins
 ## 🗄️ Data Pipeline: Import Data to SQL Database
 1. Prepare CSV files  
 2. Create tables in SQL  
-3. Import CSV files into SQL  
+3. Clean Data
+4. Import CSV files into SQL  
 ---
 
 ## 📌 Project Insights
